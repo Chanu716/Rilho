@@ -53,7 +53,9 @@ async function logClick(req, linkId) {
 
     await Click.create({ link_id: linkId, ip, country, city, device, browser, os, referrer, hour });
     await Link.updateOne({ id: linkId }, { $inc: { click_count: 1 } });
-  } catch (error) {}
+  } catch (error) {
+    console.error("CRITICAL logClick payload error:", error);
+  }
 }
 
 const isValidUrl = (string) => {
