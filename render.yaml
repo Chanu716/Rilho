@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: rilho-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false # Update this in Render Dashboard once Netlify URL is generated
+      - key: MONGODB_URI
+        sync: false # You MUST add your Atlas URI in the Render Dashboard manually
