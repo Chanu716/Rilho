@@ -14,6 +14,16 @@ const connectDB = async () => {
 const linkSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   original_url: { type: String, required: true },
+  routing_rules: {
+    android: { type: String, default: null },
+    ios: { type: String, default: null },
+    desktop: { type: String, default: null }
+  },
+  ab_test: {
+    url_b: { type: String, default: null },
+    traffic_split: { type: Number, default: 0 } // Percentage 0-100 that goes to B
+  },
+  is_malicious: { type: Boolean, default: false },
   short_code: { type: String, required: true, unique: true },
   custom_alias: { type: String, default: null },
   password: { type: String, default: null },
