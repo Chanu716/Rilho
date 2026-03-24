@@ -276,9 +276,15 @@ app.get('/api/analytics/:code', async (req, res) => {
       clicks: r.clicks 
     }));
 
+    // Recent Raw Clicks Fetch
+    const recentClicks = await Click.find(matchStage)
+      .sort({ clicked_at: -1 })
+      .limit(30)
+      .select('ip country city device browser os clicked_at');
+
     res.json({
       totalClicks, uniqueCountries, topReferrer, topDevice,
-      clicksByDay, clicksByHour, clicksByCountry, clicksByDevice, clicksByBrowser, clicksByReferrer
+      clicksByDay, clicksByHour, clicksByCountry, clicksByDevice, clicksByBrowser, clicksByReferrer, recentClicks
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
