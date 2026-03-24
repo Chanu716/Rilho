@@ -338,7 +338,7 @@ app.get('/:code', async (req, res) => {
   }
 
   logClick(req, link.id); // async
-  res.redirect(301, targetUrl);
+  res.redirect(302, targetUrl);
 });
 
 const PORT = process.env.PORT || 3000;
