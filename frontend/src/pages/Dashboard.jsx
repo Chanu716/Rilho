@@ -103,7 +103,11 @@ export default function Dashboard() {
             <StatCard title="Top Referrer" value={data.topReferrer} icon={<LinkIcon className="text-emerald-300" />} />
           </AnimatedContent>
           <AnimatedContent delay={0.4}>
-            <StatCard title="Top Device" value={data.topDevice} icon={<Smartphone className="text-amber-300" />} />
+            <StatCard 
+              title="Top Device" 
+              value={data.topDevice !== 'None' ? `${data.topDevice} (${data.clicksByDevice.find(d => d.device === data.topDevice)?.clicks || 0})` : 'None'} 
+              icon={<Smartphone className="text-amber-300" />} 
+            />
           </AnimatedContent>
         </div>
 
@@ -183,7 +187,7 @@ export default function Dashboard() {
                       paddingAngle={5}
                       dataKey="clicks"
                       nameKey="device"
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      label={({ name, percent, value }) => `${name} ${value} (${(percent * 100).toFixed(0)}%)`}
                     >
                       {data.clicksByDevice.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

@@ -338,6 +338,9 @@ app.get('/:code', async (req, res) => {
   }
 
   logClick(req, link.id); // async
+  
+  // Prevent all aggressive browser caching strategies to rigorously track multi-clicks from identical devices
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   res.redirect(302, targetUrl);
 });
 
